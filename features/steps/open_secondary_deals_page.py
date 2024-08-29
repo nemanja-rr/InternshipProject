@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from behave import given, when, then
 from time import sleep
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
 
 
 @given ('Open main page')
@@ -13,7 +14,7 @@ def open_main_page(context):
 @when ('Log in to the page')
 def click_on_email_box(context):
     context.driver.find_element(By.ID, 'email-2').send_keys('nsimic1989@gmail.com')
-    context.driver.find_element(By.ID, 'field').send_keys('Jaz1989@@')
+    context.driver.find_element(By.ID, 'field').send_keys('********')
     context.driver.find_element(By.XPATH, "//a[@class='login-button w-button']").click()
     sleep(2)
 
