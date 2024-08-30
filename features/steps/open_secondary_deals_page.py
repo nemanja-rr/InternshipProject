@@ -14,7 +14,7 @@ def open_main_page(context):
 @when ('Log in to the page')
 def click_on_email_box(context):
     context.driver.find_element(By.ID, 'email-2').send_keys('nsimic1989@gmail.com')
-    context.driver.find_element(By.ID, 'field').send_keys('********')
+    context.driver.find_element(By.ID, 'field').send_keys('Jaz1989@@')
     context.driver.find_element(By.XPATH, "//a[@class='login-button w-button']").click()
     sleep(2)
 
@@ -33,23 +33,21 @@ def verify_right_page_opens(context):
     sleep(2)
 
 
-@then ('Go to the final page using the pagination button')
+@then('Go to the final page using the pagination button')
 def go_to_final_page(context):
-    while True:
-        try:
-            next_button = context.driver.find_element(By.XPATH, "//a[@class='pagination__button w-inline-block']")
-            next_button.click()
-            sleep(1)
-        except:
-            break
+    total_page_element = context.driver.find_element(By.XPATH, "//div[@wized='totalPageProperties']")
+    total_page = int(total_page_element.text)
+    for page in range(1, total_page):
+        next_button = context.driver.find_element(By.XPATH, "//a[@class='pagination__button w-inline-block']")
+        next_button.click()
+        sleep(1)
 
 
 @then ('Go back to the first page using the pagination button')
 def go_to_beginning_page(context):
-    while True:
-        try:
-            previous_button = context.driver.find_element(By.XPATH, "//div[@wized='previousPageMLS']")
-            previous_button.click()
-            sleep(1)
-        except:
-            break
+    first_page_element = context.driver.find_element(By.XPATH, "//div[@wized='currentPageProperties']")
+    first_page = int(first_page_element.text)
+    for page in range(1, first_page):
+        previous_button = context.driver.find_element(By.XPATH, "//div[@wized='previousPageMLS']")
+        previous_button.click()
+        sleep(1)
